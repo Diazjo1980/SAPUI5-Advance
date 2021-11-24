@@ -3,12 +3,26 @@
     xmlns:mvc="sap.ui.core.mvc"
     displayBlock="true"
     xmlns="sap.m"
->
+    xmlns:core="sap.ui.core">
+
 	<Shell id="shell">
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n>title}">
-					<content />
+					<content >
+                        <HBox id="_IDGenHBox1">
+                            <Label id="labelEmployee" labelFor="inputEmployee" text="{i18n>labelEmployee}" class ="sapUiSmallMargin"/>
+                            <Input id="inputEmployee" maxLength="6" width="200px" class="sapUiSmallMarginEnd" liveChange="onValidate"/>
+                            <Label id="labelCountry" labelFor="slCountry" text="{i18n>labelCountry}" class ="sapUiSmallMargin" visible="false"/>
+                            <Select id="slCountry" forceSelection="false" visible="false">
+                                <items>
+                                    <core:Item id="iUS" key="US" text="{i18n>countryUS}"/>
+                                    <core:Item id="iUK" key="UK" text="{i18n>countryUK}"/>
+                                    <core:Item id="iES" key="ES" text="{i18n>countryES}"/>
+                                </items>
+                            </Select>
+                        </HBox>
+                    </content>
 				</Page>
 			</pages>
 		</App>
