@@ -49,7 +49,7 @@
                                         </Column>                                                                                                                       
                                     </columns>
                                     <items>
-                                        <ColumnListItem id="_IDGenColumnListItem1" >
+                                        <ColumnListItem id="_IDGenColumnListItem1" type="Active" press="onShowPostalCode">  
                                             <cells>
                                                 <Label id="_IDGenLabel5" text="{EmployeeID}"/>
                                                 <Label id="_IDGenLabel6" text="{LastName}, {FirstName}"/>
