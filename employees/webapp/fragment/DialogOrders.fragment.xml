@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+    <Dialog id="_IDGenDialog1" title="{i18n>orders}">
+        <content>
+            <Table id="_IDGenTable1" items="{jsonEmployees>Orders}" width="700px">
+                <columns>
+                    <Column id="_IDGenColumn1" >
+                        <header>
+                            <Label id="_IDGenLabel1" text="{i18n>orderID}"/>
+                        </header>
+                    </Column>
+                    <Column id="_IDGenColumn2"  >
+                        <header>
+                            <Label id="_IDGenLabel2"  text="{i18n>freight}"/>
+                        </header>
+                    </Column> 
+                    <Column id="_IDGenColumn3"  >
+                        <header>
+                            <Label id="_IDGenLabel3" text="{i18n>shipAddress}" />
+                        </header>
+                    </Column>                               
+                </columns>
+                <items>
+                    <ColumnListItem id="_IDGenColumnListItem1" >
+                        <cells>
+                            <Label id="_IDGenLabel4" text="{jsonEmployees>OrderID}"/>
+                            <Label id="_IDGenLabel5" text="{jsonEmployees>Freight}"/>
+                            <Label id="_IDGenLabel6" text="{jsonEmployees>ShipAddress}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+        <endButton>
+            <Button id="_IDGenButton1" text="{i18n>close}" icon="sap-icon://decline" type="Reject" press="onCloseOrders"/>
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

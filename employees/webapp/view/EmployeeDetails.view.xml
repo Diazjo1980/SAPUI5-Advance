@@ -1,0 +1,58 @@
+<mvc:View controllerName="logaligroup.employees.controller.EmployeeDetails"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+
+    <Page id="_IDGenPage1" title="{i18n>employeeDetails}">
+        
+        <Panel id="_IDGenPanel1" >
+            <FlexBox id="_IDGenFlexBox1" height="65px" alignContent="Center" justifyContent="Center">
+                <items>
+                    <Text id="_IDGenText1" text="{jsonEmployees>LastName}, {jsonEmployees>FirstName}" class="boldText"/>
+                </items>
+            </FlexBox>
+
+            <FlexBox id="_IDGenFlexBox2" height="65px" alignItems="Start" justifyContent="SpaceBetween">
+                <items>
+                    <VBox id="_IDGenVBox1" >
+                        <Text id="_IDGenText2" text="{i18n>employeeID}" class="boldText sapUiTinyMarginEnd"/>
+                        <Text id="_IDGenText3" text="{jsonEmployees>EmployeeID}"/>
+                    </VBox>
+
+                    <VBox id="_IDGenVBox2" >
+                        <Text id="_IDGenText4" text="{i18n>titleEmployee}" class="boldText"/>
+                        <Text id="_IDGenText5" text="{jsonEmployees>Title}"/>
+                    </VBox>
+                </items>
+            </FlexBox>
+
+            <FlexBox id="_IDGenFlexBox3" alignItems="Start">
+                <items>
+                    <HBox id="_IDGenHBox1" >
+                        <Text id="_IDGenText6" text="{i18n>countryCode}" class="boldText"/>
+                        <Text id="_IDGenText7" text="{jsonEmployees>Country}"/>
+                        <layoutData>
+                            <FlexItemData id="_IDGenFlexItemData1" growFactor="3"/>
+                        </layoutData>
+                    </HBox>
+                    <HBox id="_IDGenHBox2" >
+                        <Text id="_IDGenText8" text="{i18n>city}" class="boldText"/>
+                        <Text id="_IDGenText9" text="{jsonEmployees>City}"/>
+                        <layoutData>
+                            <FlexItemData id="_IDGenFlexItemData2" growFactor="2"/>
+                        </layoutData>
+                    </HBox>
+                    <FlexBox id="_IDGenFlexBox4" direction="Row" alignItems="Start">
+                            <Text id="_IDGenText10"  text="{i18n>postalCode}" class="boldText"/>
+                            <Text id="_IDGenText11"  text="{jsonEmployees>PostalCode}"/>
+                        <layoutData>
+                            <FlexItemData id="_IDGenFlexItemData3" growFactor="1"/>
+                        </layoutData>                                                     
+                    </FlexBox>
+                </items>
+            </FlexBox>
+
+        </Panel>
+    </Page>
+</mvc:View>
