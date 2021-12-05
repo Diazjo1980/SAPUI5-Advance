@@ -54,5 +54,17 @@
             </FlexBox>
 
         </Panel>
+        <Panel id="_IDGenPanel2" class="sapUiSizeCompact" backgroundDesign="Transparent">
+            <headerToolbar>
+                <Toolbar id="_IDGenToolbar1" >
+                    <Title id="_IDGenTitle1" text="{i18n>incidence} {= ${jsonEmployees>Country} !=='US' ? ${i18n>europe} : ${i18n>us}}" ></Title>
+                    <ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                    <Button id="_IDGenButton1" text="{i18n>createIncidence}" class="sapUiSmallMarginEnd" icon="sap-icon://add" type="Emphasized" press="onCreateIncidence"/>
+                </Toolbar>
+            </headerToolbar>
+        </Panel>
+        <Panel id="tableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent">
+        
+        </Panel>        
     </Page>
 </mvc:View>
