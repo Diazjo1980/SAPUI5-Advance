@@ -5,7 +5,7 @@
     {
       "authenticationType": "xsuaa",
       "csrfProtection": false,
-      "source": "^/Northwind/v2/Northwind/Northwind.svc/(.*)$",
+      "source": "^/Northwind/(.*)$",
       "destination": "Northwind",
       "target": "$1"
     },
