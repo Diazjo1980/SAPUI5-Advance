@@ -2,7 +2,7 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Employees run",
+      "name": "employees Run",
       "cwd": "${workspaceFolder}",
       "runtimeArgs": [
         "fiori",
@@ -21,10 +21,10 @@
       "console": "internalConsole",
       "internalConsoleOptions": "openOnSessionStart",
       "env": {
+        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/logali/employees\"}",
         "FIORI_TOOLS_UI5_VERSION": "",
         "FIORI_TOOLS_UI5_URI": "https://ui5.sap.com",
-        "run.config": "{\"handlerId\":\"fiori_tools\",\"runnableId\":\"/home/user/projects/logali/employees\"}",
-        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"destination\":\"Northwind\"}]"
+        "FIORI_TOOLS_BACKEND_CONFIG": "[{\"path\":\"/V2\",\"destination\":\"Northwind\"},{\"path\":\"/sap\",\"destination\":\"logaligroupERP\"}]"
       }
     }
   ]

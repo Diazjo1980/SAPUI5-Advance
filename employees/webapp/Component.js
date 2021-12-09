@@ -1,8 +1,8 @@
 sap.ui.define([
-		"sap/ui/core/UIComponent",
-		"sap/ui/Device",
-		"logaligroup/employees/model/models"
-	],
+    "sap/ui/core/UIComponent",
+    "sap/ui/Device",
+    "logaligroup/employees/model/models"
+],
     function (UIComponent, Device, models) {
         "use strict";
 
@@ -23,9 +23,12 @@ sap.ui.define([
                 // enable routing
                 this.getRouter().initialize();
 
-				// set the device model
-				this.setModel(models.createDeviceModel(), "device");
-            }
+                // set the device model
+                this.setModel(models.createDeviceModel(), "device");
+            },
+            SapId : "diazmjorgea@gmail.com"
+
         });
+
     }
 );
