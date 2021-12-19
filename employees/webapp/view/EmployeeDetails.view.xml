@@ -62,9 +62,10 @@
                     <Button id="_IDGenButton1" text="{i18n>createIncidence}" class="sapUiSmallMarginEnd" icon="sap-icon://add" type="Emphasized" press="onCreateIncidence"/>
                 </Toolbar>
             </headerToolbar>
+            <Panel id="tableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent"></Panel>
         </Panel>
-        <Panel id="tableIncidence" class="sapUiNoContentPadding" backgroundDesign="Transparent">
-        
-        </Panel>        
+    <Panel id="_IDGenPanel3" class="sapUiSizeCompact" backgroundDesign="Transparent" headerText="{i18n>orders}"> 
+        <core:Fragment fragmentName="logaligroup.employees.fragment.TableOrders" type="XML"/>
+    </Panel>               
     </Page>
 </mvc:View>

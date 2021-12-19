@@ -1,10 +1,11 @@
 //@ts-nocheck
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "logaligroup/employees/model/formatter"
+    "logaligroup/employees/model/formatter",
+    "sap/m/MessageBox"
 ],
 
-    function (Controller, formatter) {
+    function (Controller, formatter, MessageBox) {
 
         function onInit() {
             this._bus = sap.ui.getCore().getEventBus();
@@ -18,7 +19,7 @@ sap.ui.define([
 
             let odata = incidenceModel.getData();
             let index = odata.length;
-            odata.push({ index: index + 1 });
+            odata.push({ index: index + 1, _validateState: false, EanbledSave: false });
             incidenceModel.refresh();
 
             newIncidence.bindElement("incidenceModel>/" + index);
@@ -47,11 +48,19 @@ sap.ui.define([
             // }
 
             let contextObject = oEvent.getSource().getBindingContext("incidenceModel").getObject();
-            this._bus.publish("incidence", "onDeleteIncidence", {
-                IncidenceId: contextObject.IncidenceId,
-                SapId: contextObject.SapId,
-                EmployeeId: contextObject.EmployeeId
+
+            MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmDeleteIncidence"), {
+                onClose: function(oAction){
+                    if (oAction === "OK"){
+                        this._bus.publish("incidence", "onDeleteIncidence", {
+                            IncidenceId: contextObject.IncidenceId,
+                            SapId: contextObject.SapId,
+                            EmployeeId: contextObject.EmployeeId
+                        });                        
+                    }
+                }.bind(this)
             });
+
         };
 
         function onSaveIncidence(oEvent) {
@@ -63,20 +72,68 @@ sap.ui.define([
         function updateIncidenceCreationDate(oEvent) {
             let context = oEvent.getSource().getBindingContext("incidenceModel");
             let contextObject = context.getObject();
-            contextObject.CreationDateX = true;
+            let oResourceBudle = this.getView().getModel("i18n").getResourceBundle();
 
+            if (!oEvent.getSource().isValidValue()) {
+                contextObject._validateState = false;
+                contextObject.CreationDateState = "Error";
+                MessageBox.error(oResourceBudle.getText("errorCreationDateValue"), {
+                    title: "Error",
+                    onClose: null,
+                    StyleCalss: "",
+                    actions: MessageBox.Action.Close,
+                    emphasizeAction: null,
+                    initialFocus: null,
+                    textDirection: sap.ui.core.TextDirection.Inherit
+                });
+
+            } else {
+                contextObject.CreationDateX = true;
+                contextObject._validateState = true;
+                contextObject.CreationDateState = "None";
+            };
+
+            if (oEvent.getSource().isValidValue() && contextObject.Reason) {
+                contextObject.EanbledSave = true;
+            } else {
+                contextObject.EanbledSave = false;
+            };
+            context.getModel().refresh();
         };
 
         function updateIncidenceReason(oEvent) {
             let context = oEvent.getSource().getBindingContext("incidenceModel");
             let contextObject = context.getObject();
-            contextObject.ReasonX = true;
+            let oResourceBudle = this.getView().getModel("i18n").getResourceBundle();
 
+            if (oEvent.getSource().getValue()) {
+                contextObject.ReasonState = "None";
+                contextObject.ReasonX = true;
+            } else {
+                contextObject.ReasonState = "Error";
+            };
+
+            if (contextObject._validateState && oEvent.getSource().getValue()) {
+                contextObject.EanbledSave = true;
+            } else {
+                contextObject.EanbledSave = false;
+            };
+
+            context.getModel().refresh();
         };
 
         function updateIncidenceType(oEvent) {
             let context = oEvent.getSource().getBindingContext("incidenceModel");
             let contextObject = context.getObject();
+
+            if (contextObject._validateState && contextObject.Reason) {
+                contextObject.EanbledSave = true;
+            } else {
+                contextObject.EanbledSave = false;
+            };
+
+            context.getModel().refresh();
+
             contextObject.TypeX = true;
 
         };
