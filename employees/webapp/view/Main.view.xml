@@ -4,37 +4,30 @@
     xmlns="sap.m"
     xmlns:core="sap.ui.core"
     xmlns:f="sap.f">
+    <Page id="_IDGenPage1" showHeader="false">
+        <content>
+            <f:FlexibleColumnLayout id="fcl" backgroundDesign="Solid" layout="{jsonLayout>/ActiveKey}">
+                <f:beginColumnPages>
+                    <mvc:XMLView id="masterEmployeeView" viewName="logaligroup.employees.view.MasterEmployee"></mvc:XMLView>
+                </f:beginColumnPages>
+            
+                <f:midColumnPages>
+                    <mvc:XMLView id="employeeDetailsView" viewName="logaligroup.employees.view.EmployeeDetails"></mvc:XMLView>
+                </f:midColumnPages>
 
-	<Shell id="shell">
-		<App id="app">
-			<pages>
-                <Page id="_IDGenPage1" showHeader="false">
-                    <content>
-                        <f:FlexibleColumnLayout id="fcl" backgroundDesign="Solid" layout="{jsonLayout>/ActiveKey}">
-                            <f:beginColumnPages>
-                                <mvc:XMLView id="masterEmployeeView" viewName="logaligroup.employees.view.MasterEmployee"></mvc:XMLView>
-                            </f:beginColumnPages>
-                        
-                            <f:midColumnPages>
-                                <mvc:XMLView id="employeeDetailsView" viewName="logaligroup.employees.view.EmployeeDetails"></mvc:XMLView>
-                            </f:midColumnPages>
-
-                            <f:endColumnPages>
-                                <Page id="_IDGenPage2" >
-                                </Page>
-                            </f:endColumnPages>
-                        </f:FlexibleColumnLayout>
-                    </content>
-                    <footer>
-                        <Toolbar id="_IDGenToolbar1" >
-                            <Label id="_IDGenLabel1" text="{i18n>layout}" class="sapUiSmallMargin"/>
-                            <Select id="_IDGenSelect1" items="{jsonLayout>/Layout}" selectedKey="{jsonLayout>/ActiveKey}">
-                                <core:Item id="_IDGenItem1" key="{jsonLayout>Key}" text="{jsonLayout>Text}"></core:Item>
-                            </Select>
-                        </Toolbar>
-                    </footer>
-                </Page>
-			</pages>
-		</App>
-	</Shell>
+                <f:endColumnPages>
+                    <Page id="_IDGenPage2" >
+                    </Page>
+                </f:endColumnPages>
+            </f:FlexibleColumnLayout>
+        </content>
+        <footer>
+            <Toolbar id="_IDGenToolbar1" >
+                <Label id="_IDGenLabel1" text="{i18n>layout}" class="sapUiSmallMargin"/>
+                <Select id="_IDGenSelect1" items="{jsonLayout>/Layout}" selectedKey="{jsonLayout>/ActiveKey}">
+                    <core:Item id="_IDGenItem1" key="{jsonLayout>Key}" text="{jsonLayout>Text}"></core:Item>
+                </Select>
+            </Toolbar>
+        </footer>
+    </Page>
 </mvc:View>

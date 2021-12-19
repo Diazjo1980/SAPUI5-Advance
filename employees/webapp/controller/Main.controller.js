@@ -14,7 +14,7 @@ sap.ui.define([
 
             onInit: function () {
                 var oView = this.getView();
-                var i18nBundle = oView.getModel("i18n").getResourceBundle();
+                let i18nBundle = oView.getModel("i18n").getResourceBundle();
 
                 var oJSONModelEmpl = new sap.ui.model.json.JSONModel();
                 oJSONModelEmpl.loadData("./localService/mockdata/Employees.json", false);
