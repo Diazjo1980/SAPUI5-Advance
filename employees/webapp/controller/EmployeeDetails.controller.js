@@ -50,13 +50,13 @@ sap.ui.define([
             let contextObject = oEvent.getSource().getBindingContext("incidenceModel").getObject();
 
             MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmDeleteIncidence"), {
-                onClose: function(oAction){
-                    if (oAction === "OK"){
+                onClose: function (oAction) {
+                    if (oAction === "OK") {
                         this._bus.publish("incidence", "onDeleteIncidence", {
                             IncidenceId: contextObject.IncidenceId,
                             SapId: contextObject.SapId,
                             EmployeeId: contextObject.EmployeeId
-                        });                        
+                        });
                     }
                 }.bind(this)
             });
@@ -138,6 +138,15 @@ sap.ui.define([
 
         };
 
+        function toOrderDetails(oEvent) {
+            let orderID = oEvent.getSource().getBindingContext("odataNorthwind").getObject().OrderID;
+            let oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+            oRouter.navTo("RouteOrderDetails", {
+                OrderID: orderID
+            });
+        };
+
+
 
         let EmployeeDetails = Controller.extend("logaligroup.employees.controller.EmployeeDetails", {
 
@@ -152,6 +161,7 @@ sap.ui.define([
         EmployeeDetails.prototype.updateIncidenceCreationDate = updateIncidenceCreationDate;
         EmployeeDetails.prototype.updateIncidenceReason = updateIncidenceReason;
         EmployeeDetails.prototype.updateIncidenceType = updateIncidenceType;
+        EmployeeDetails.prototype.toOrderDetails = toOrderDetails;
 
         return EmployeeDetails;
 

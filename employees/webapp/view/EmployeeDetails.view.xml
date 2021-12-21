@@ -30,21 +30,21 @@
             <FlexBox id="_IDGenFlexBox3" alignItems="Start">
                 <items>
                     <HBox id="_IDGenHBox1" >
-                        <Text id="_IDGenText6" text="{i18n>countryCode}" class="boldText"/>
+                        <Text id="_IDGenText6" text="{i18n>countryCode}:" class="boldText"/>
                         <Text id="_IDGenText7" text="{odataNorthwind>Country}"/>
                         <layoutData>
                             <FlexItemData id="_IDGenFlexItemData1" growFactor="3"/>
                         </layoutData>
                     </HBox>
                     <HBox id="_IDGenHBox2" >
-                        <Text id="_IDGenText8" text="{i18n>city}" class="boldText"/>
+                        <Text id="_IDGenText8" text="{i18n>city}:" class="boldText"/>
                         <Text id="_IDGenText9" text="{odataNorthwind>City}"/>
                         <layoutData>
                             <FlexItemData id="_IDGenFlexItemData2" growFactor="2"/>
                         </layoutData>
                     </HBox>
                     <FlexBox id="_IDGenFlexBox4" direction="Row" alignItems="Start">
-                            <Text id="_IDGenText10"  text="{i18n>postalCode}" class="boldText"/>
+                            <Text id="_IDGenText10"  text="{i18n>postalCode}:" class="boldText"/>
                             <Text id="_IDGenText11"  text="{odataNorthwind>PostalCode}"/>
                         <layoutData>
                             <FlexItemData id="_IDGenFlexItemData3" growFactor="1"/>

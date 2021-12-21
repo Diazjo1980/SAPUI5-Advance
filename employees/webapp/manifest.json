@@ -9,7 +9,7 @@
         },
         "title": "{{appTitle}}",
         "description": "{{appDescription}}",
-        "dataSources": {            
+        "dataSources": {
             "Northwind.svc": {
                 "uri": "/V2/Northwind/Northwind.svc/",
                 "type": "OData",
@@ -45,7 +45,7 @@
         }
     },
     "sap.ui5": {
-        "flexEnabled": true,       
+        "flexEnabled": true,
         "dependencies": {
             "minUI5Version": "1.96.0",
             "libs": {
@@ -111,6 +111,13 @@
                     "target": [
                         "TargetMain"
                     ]
+                },
+                {
+                    "name": "RouteOrderDetails",
+                    "pattern": "OrderDetails/{OrderID}",
+                    "target": [
+                        "TargetOrderDetails"
+                    ]
                 }
             ],
             "targets": {
@@ -121,12 +128,10 @@
                     "viewId": "Main",
                     "viewName": "Main"
                 },
-                "TargetMasterEmployee": {
+                "TargetOrderDetails": {
                     "viewType": "XML",
-                    "transition": "slide",
-                    "clearControlAggregation": false,
-                    "viewId": "MasterEmployee",
-                    "viewName": "MasterEmployee"
+                    "viewId": "OrderDetails",
+                    "viewName": "OrderDetails"
                 }
             }
         },
