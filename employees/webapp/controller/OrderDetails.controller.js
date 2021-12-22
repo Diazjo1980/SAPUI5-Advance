@@ -28,6 +28,11 @@ sap.ui.define([
             }
         };
 
+        function onClearSignature (oEvent) {
+            let signature = this.byId("signature");
+            signature.clear();
+        };
+
         let OrderDetails = Controller.extend("logaligroup.employees.controller.OrderDetails", {
 
 
@@ -35,6 +40,7 @@ sap.ui.define([
 
             OrderDetails.prototype.onInit = onInit;
             OrderDetails.prototype.onBack = onBack;
+            OrderDetails.prototype.onClearSignature = onClearSignature;
 
             return OrderDetails;
 });
