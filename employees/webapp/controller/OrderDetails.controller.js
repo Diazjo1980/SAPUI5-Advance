@@ -2,8 +2,17 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/core/routing/History",
-    "sap/m/MessageBox"
-], function (Controller, History, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+
+	/**
+	 * @param {typeof sap.ui.core.mvc.Controller} Controller
+     * @param {typeof sap.ui.model.Filter} Filter
+     * @param {typeof sap.ui.model.FilterOperator} FilterOperator
+	 */
+
+], function (Controller, History, MessageBox, Filter, FilterOperator) {
 
     function _onObjectMatched(oEvent) {
 
@@ -32,6 +41,7 @@ sap.ui.define([
 
     function _readSignature(orderId, employeeId) {
 
+        // Read signature image
         this.getView().getModel("incidenceModel").read("/SignatureSet(OrderId='" + orderId + "',SapId='" + this.getOwnerComponent().SapId + "',EmployeeId='" + employeeId + "')", {
             success: function (data) {
                 const signature = this.getView().byId("signature");
@@ -42,7 +52,24 @@ sap.ui.define([
 
             }.bind(this),
 
-            error: function (data) { }
+            error: function (data) {
+
+            }
+        });
+
+        //Bind uploadcolletion files
+        this.byId("uploadCollection").bindAggregation("items", {
+            path: "incidenceModel>/FilesSet",
+            filters: [
+                new Filter("OrderId", FilterOperator.EQ, orderId),
+                new Filter("SapId", FilterOperator.EQ, this.getOwnerComponent().SapId),
+                new Filter("EmployeeId", FilterOperator.EQ, employeeId)
+            ],
+            template: new sap.m.UploadCollectionItem({
+                documentId: "{incidenceModel>AttId}",
+                visibleEdit: false,
+                fileName: "{incidenceModel>FileName}"
+            }).attachPress(this.downloadFile)
         });
 
     };
@@ -146,8 +173,8 @@ sap.ui.define([
         let oHeaderSlug = new sap.m.UploadCollectionParameter({
             name: "slug",
             value: objectContext.OrderID + ";" + this.getOwnerComponent().SapId + ";"
-                   + objectContext.EmployeeID 
-                   + ";" + fileName  
+                + objectContext.EmployeeID
+                + ";" + fileName
         });
 
         oEvent.getParameters().addHeaderParameter(oHeaderSlug);
@@ -166,6 +193,31 @@ sap.ui.define([
         oUploadColletcion.addHeaderParameter(oHeaderToken);
     };
 
+    function onFileUploadCompleted(oEvent) {
+        oEvent.getSource().getBinding("items").refresh();
+    };
+
+    function onFileDeleted(oEvent) {
+        let oUploadColletcion = oEvent.getSource();
+        let sPath = oEvent.getParameter("item").getBindingContext("incidenceModel").getPath();
+
+        this.getView().getModel("incidenceModel").remove(sPath, {
+            success: function () {
+                oUploadColletcion.getBinding("items").refresh();
+            },
+
+            error: function () {
+
+            }
+        });
+    };
+
+    function downloadFile(oEvent) {
+        
+        const sPath = oEvent.getSource().getBindingContext("incidenceModel").getPath();
+        window.open("/sap/opu/odata/sap/YSAPUI5_SRV_01" + sPath + "/$value");
+    };
+
     let OrderDetails = Controller.extend("logaligroup.employees.controller.OrderDetails", {
 
 
@@ -178,6 +230,9 @@ sap.ui.define([
     OrderDetails.prototype.onSaveSignature = onSaveSignature;
     OrderDetails.prototype.onFileBeforeUpload = onFileBeforeUpload;
     OrderDetails.prototype.onFileChange = onFileChange;
+    OrderDetails.prototype.onFileUploadCompleted = onFileUploadCompleted;
+    OrderDetails.prototype.onFileDeleted = onFileDeleted;
+    OrderDetails.prototype.downloadFile = downloadFile;
 
     return OrderDetails;
 });
