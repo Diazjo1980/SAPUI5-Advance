@@ -11,8 +11,8 @@ sap.ui.define([
             this._bus = sap.ui.getCore().getEventBus();
         };
 
-        function onCreateIncidence() {
-
+        function onCreateIncidence(oEvenT) {
+            oEvenT.getSource().setEnabled(false);
             let tableIncidence = this.getView().byId("tableIncidence");
             let newIncidence = sap.ui.xmlfragment("logaligroup.employees.fragment.NewIncidence", this);
             let incidenceModel = this.getView().getModel("incidenceModel");
@@ -51,22 +51,29 @@ sap.ui.define([
 
             MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmDeleteIncidence"), {
                 onClose: function (oAction) {
-                    if (oAction === "OK") {
+                    if (oAction === "OK" && !contextObject.IncidenceId == undefined) {
                         this._bus.publish("incidence", "onDeleteIncidence", {
                             IncidenceId: contextObject.IncidenceId,
                             SapId: contextObject.SapId,
                             EmployeeId: contextObject.EmployeeId
                         });
+                        this.getView().byId("_IDGenButton1").setEnabled(true);
+                    } else {
+                        let tableIncidence = this.getView().byId("tableIncidence");
+                        let rowIncidence = tableIncidence.getContent()[0];
+                        tableIncidence.removeContent(rowIncidence);
+                        this.getView().byId("_IDGenButton1").setEnabled(true);
                     }
                 }.bind(this)
-            });
-
+            });            
         };
 
         function onSaveIncidence(oEvent) {
+            
             let incidence = oEvent.getSource().getParent().getParent();
             let incidenceRow = incidence.getBindingContext("incidenceModel");
             this._bus.publish("incidence", "onSaveIncidence", { incidenceRow: incidenceRow.sPath.replace('/', '') });
+            this.getView().byId("_IDGenButton1").setEnabled(true);
         };
 
         function updateIncidenceCreationDate(oEvent) {
