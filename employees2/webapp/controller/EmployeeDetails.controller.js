@@ -59,17 +59,19 @@ sap.ui.define([
                         });
                         this.getView().byId("_IDGenButton1").setEnabled(true);
                     } else {
-                        let tableIncidence = this.getView().byId("tableIncidence");
-                        let rowIncidence = tableIncidence.getContent()[0];
-                        tableIncidence.removeContent(rowIncidence);
+                        let tableIncidence = this.getView().byId("tableIncidence").getModel();
+                        let rowIncidence = tableIncidence.getData();
+                        let sPath = this.getBindingContext().getPath();
+                        let sIndex = parseInt(sPath.substring(sPath.lastIndexOf('/') + 1));
+                        rowIncidence.removeContent(sIndex);
                         this.getView().byId("_IDGenButton1").setEnabled(true);
                     }
                 }.bind(this)
-            });            
+            });
         };
 
         function onSaveIncidence(oEvent) {
-            
+
             let incidence = oEvent.getSource().getParent().getParent();
             let incidenceRow = incidence.getBindingContext("incidenceModel");
             this._bus.publish("incidence", "onSaveIncidence", { incidenceRow: incidenceRow.sPath.replace('/', '') });
