@@ -51,19 +51,19 @@ sap.ui.define([
 
             MessageBox.confirm(this.getView().getModel("i18n").getResourceBundle().getText("confirmDeleteIncidence"), {
                 onClose: function (oAction) {
-                    if (oAction === "OK" && !contextObject.IncidenceId == undefined) {
+                    if (oAction === "OK" && contextObject.IncidenceId !== undefined ) {
                         this._bus.publish("incidence", "onDeleteIncidence", {
                             IncidenceId: contextObject.IncidenceId,
                             SapId: contextObject.SapId,
                             EmployeeId: contextObject.EmployeeId
                         });
                         this.getView().byId("_IDGenButton1").setEnabled(true);
-                    } else {
-                        let tableIncidence = this.getView().byId("tableIncidence").getModel();
-                        let rowIncidence = tableIncidence.getData();
-                        let sPath = this.getBindingContext().getPath();
-                        let sIndex = parseInt(sPath.substring(sPath.lastIndexOf('/') + 1));
-                        rowIncidence.removeContent(sIndex);
+
+                    } else if (contextObject.IncidenceId === undefined) {
+                        let tableIncidence = this.getView().byId("tableIncidence");
+                        let rowIncidence = tableIncidence.getContent();
+                        let lastIndex = rowIncidence.length -1;
+                        tableIncidence.removeContent(lastIndex);
                         this.getView().byId("_IDGenButton1").setEnabled(true);
                     }
                 }.bind(this)
